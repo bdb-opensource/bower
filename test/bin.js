@@ -23,7 +23,7 @@ describe('bin', function () {
   after(clean);
 
   it('should exit with status 0 if there were no errors', function (done) {
-    var cp = spawn('node', [__dirname + '/../bin/bower', 'install', 'jquery'], {
+    var cp = spawn('node', [__dirname + '/../bin/bower', 'install', __dirname + '/../test/fake_package'], {
       cwd: testDir
     });
 
@@ -45,13 +45,13 @@ describe('bin', function () {
   });
 
   it('should use the command abbreviations', function (done) {
-    var cp = spawn('node', [__dirname + '/../bin/bower', 'inst', 'jquery'], {
+    var cp = spawn('node', [__dirname + '/../bin/bower', 'inst', __dirname + '/../test/fake_package'], {
       cwd: testDir
     });
 
     cp.on('exit', function (status) {
       assert.equal(status, 0);
-      assert(fileExists.sync(testDir + '/bower_components/jquery'));
+      assert(fileExists.sync(testDir + '/bower_components/fake_package'));
       done();
     });
   });
